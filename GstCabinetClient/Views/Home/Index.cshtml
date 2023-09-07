@@ -1,0 +1,98 @@
+﻿@model List<Disponibilite>
+@{
+    var medcins = (List<Medcin>)ViewBag.doctors;
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    let pos = [];
+    function getcalendar(i, weeknum, idmedcin) {
+        pos[i] = parseInt(pos[i]) + parseInt(weeknum);
+
+        if (pos[i] == 1)
+        //si je suis dans l position 1 desactiver button precedent
+            $("#prev_" + idmedcin).addClass("disabled");
+        else
+            $("#prev_" + idmedcin).removeClass("disabled");
+
+       
+
+        $.ajax({
+            url: '/Home/GetPartial',
+            type: 'GET',
+            // passer les données qui sont en param
+            data: { num: pos[i], medcinid: idmedcin },
+            success: function (data) {
+                $("#mycontent_" + idmedcin).html(data);
+            }
+        });
+    }
+    $(document).ready(function () {
+        var doctors = document.getElementsByClassName("mycontent");
+        console.log("n=" + doctors.length);
+        var medid = 0;
+        for (let i = 0; i < doctors.length; i++) {
+            medid = parseInt(doctors[i].id.replace("mycontent_", ""));
+            pos.push(1);
+            getcalendar(i, 0, medid);
+        }
+    });
+</script>
+<!-- MAKE AN APPOINTMENT -->
+<section id="appointment" data-stellar-background-ratio="3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg col-sm-6">
+            </div>
+            <div class="col-lg col-sm-6">
+                <!-- CONTACT FORM HERE -->
+                @{
+                    int i = 0;
+                }
+                @foreach (var doctor in medcins)
+                {
+                    <div class="row">
+                        <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="card mb">
+                                <div class="card-body">
+                                    <h4>@doctor.Nom @doctor.Prenom</h4>
+                                    <a href="/Disponibilite/Add" class="text-success">
+                                        <i class="mdi mdi-calendar-plus"></i>
+                                    </a>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a href="javascript:getcalendar(@i,-1,@doctor.Id);" id="prev_@doctor.Id" class="btn disabled">
+                                                <i class="fa fa-chevron-left"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-10">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a href="javascript:getcalendar(@i,1,@doctor.Id);" id="next_@doctor.Id" class="btn">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div id="mycontent_@doctor.Id" class="mycontent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    i++;
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //optimiser sidebar
+    document.body.classList.add("sidebar-icon-only");
+</script>
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GstCabinetClient", "GstCabinetClient\GstCabinetClient.csproj", "{6587CF7E-9ECD-4E74-9545-65E535BDB29F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6587CF7E-9ECD-4E74-9545-65E535BDB29F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6587CF7E-9ECD-4E74-9545-65E535BDB29F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6587CF7E-9ECD-4E74-9545-65E535BDB29F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6587CF7E-9ECD-4E74-9545-65E535BDB29F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {395475CF-D7A1-46D9-9E76-F530C4E95C8D}
+	EndGlobalSection
+EndGlobal
